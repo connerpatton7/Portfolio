@@ -1,0 +1,19 @@
+body {
+  font-family: Lato;
+  background: #2d2d30;
+  height: 100%;
+  color: white;
+  text-align: center;
+  font-size: 100px;
+}
+
+.colored-line{
+  border: none;
+  margin-top: 0px;
+  height: 30px;
+  background-color: #a606f7
+}
+
+:root {
+  --main-spacing: 16px;
+}
