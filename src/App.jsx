@@ -1,15 +1,22 @@
 import './App.css';
-import AppHeader from './components/Header.tsx';
+import Skills from './components/Skills.tsx'
+import Cell from './components/SkillsCell.tsx';
+import cppLogo from './assets/C++_logo.png';
 
 function App() {
   return (
     <>
-      <hr class='colored-line' /> 
+    {/* make a bar that displays github, resume, and linkedin */}
+      <hr class='colored-line' />
       <body>
-        <AppHeader title="Conner Patton" />
-        <h2 style={{width: '60%', margin: '20px'}}>Location: Athens, Ohio</h2>
-        <h2 style={{width: '60%', paddingLeft: '75px'}}>Major: Computer Science <br style={{paddingLeft: '100px'}}/> Artificial Intelligence</h2>
-        <h2 style={{width: '60%', paddingLeft: '75px'}}></h2>
+        <button>Github</button>
+        <button>Resume</button>
+        <button style={{ width: '50%' }}>LinkedIn</button>
+        {/* Add picture of self, maybe circle with glow effect */}
+        <h1 style={{ textAlign: 'middle' }}>Hello, I'm Conner Patton, a Computer Science & Artificial Intelligence Major at Ohio University!</h1>
+        <h1 style={{ textAlign: 'middle' }}>Skills</h1>
+        <Cell imageCell={cppLogo} />
+        <Skills />
       </body>
     </>
   );

@@ -1,19 +1,35 @@
 body {
-  font-family: Lato;
-  background: #2d2d30;
-  height: 100%;
-  color: white;
+  font-family: Lato, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: #0f172a;
+  min-height: 100vh;
+  margin: 0;
+  color: #ffffff;
   text-align: center;
   font-size: 100px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.colored-line{
+.colored-line {
   border: none;
   margin-top: 0px;
   height: 30px;
-  background-color: #a606f7
+  background-color: #5b1df0
 }
 
+.button
+{
+  background-color: #5b1df0;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
 :root {
   --main-spacing: 16px;
 }
