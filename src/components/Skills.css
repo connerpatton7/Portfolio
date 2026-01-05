@@ -1,0 +1,12 @@
+.flex-container {
+  display: flex; /* This automatically places children side by side */
+  justify-content: space-around; /* Optional: Distributes space evenly */
+}
+
+.flex-container > div {
+  flex: 1; /* Optional: Makes all children take equal width */
+  padding: 10px;
+  border: 1px solid black;
+}
+
+

@@ -5,7 +5,7 @@
     height: 300px;
 
     /* Add a background color to make it visible */
-    background-color: white;
+    background-color: #15181b;
 
     /* Optional: Center the text inside */
     display: flex;
@@ -25,4 +25,9 @@
     object-fit: contain;
     display: block;
     margin: 0 auto;
+}
+
+.square :hover
+{
+
 }

@@ -1,22 +1,28 @@
-import './App.css';
+import './App.css'
 import Skills from './components/Skills.tsx'
-import Cell from './components/SkillsCell.tsx';
-import cppLogo from './assets/C++_logo.png';
+import SimpleAccordion from './components/Accordion.tsx'
+
 
 function App() {
   return (
     <>
-    {/* make a bar that displays github, resume, and linkedin */}
+      {/* make a bar that displays github, resume, and linkedin */}
       <hr class='colored-line' />
       <body>
-        <button>Github</button>
-        <button>Resume</button>
-        <button style={{ width: '50%' }}>LinkedIn</button>
         {/* Add picture of self, maybe circle with glow effect */}
-        <h1 style={{ textAlign: 'middle' }}>Hello, I'm Conner Patton, a Computer Science & Artificial Intelligence Major at Ohio University!</h1>
-        <h1 style={{ textAlign: 'middle' }}>Skills</h1>
-        <Cell imageCell={cppLogo} />
-        <Skills />
+        <h1>Conner Patton</h1>
+        <SimpleAccordion>
+          CS student, AI
+        </SimpleAccordion>
+        <SimpleAccordion title='Skills'>
+          <Skills />
+        </SimpleAccordion>
+        <SimpleAccordion title='Upcoming Projects'>
+          penis
+        </SimpleAccordion>
+        <button href="https://github.com/connerpatton7">Github</button>
+        <button>Resume</button>
+        <button href="https://www.linkedin.com/in/connerpatton/" style={{ width: '50%' }}>LinkedIn</button>
       </body>
     </>
   );
