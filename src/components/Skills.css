@@ -1,12 +1,19 @@
 .flex-container {
-  display: flex; /* This automatically places children side by side */
-  justify-content: space-around; /* Optional: Distributes space evenly */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  align-items: center;
+  justify-items: center;
+  width: 100%;
 }
 
 .flex-container > div {
-  flex: 1; /* Optional: Makes all children take equal width */
-  padding: 10px;
-  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px;
+  border: none;
+  width: 100%;
 }
 
 

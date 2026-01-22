@@ -1,0 +1,94 @@
+/* Top bar */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  /* purple bar */
+  background: linear-gradient(180deg, #6a3be0cc, #5728c5ff);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  z-index: 1200;
+  border-bottom: 1px solid rgba(0,0,0,0.18);
+}
+
+/* subtle persistent glow that spills into the page background */
+.top-bar {
+  --bar-glow-outer: rgba(87,40,197,0.12);
+  --bar-glow-inner: rgba(106,59,224,0.18);
+  overflow: visible; /* allow glow to spill */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12), 0 2px 10px var(--bar-glow-outer);
+}
+
+.bar-inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+.bar-brand {
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.2px;
+}
+
+.bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bar-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  height: 40px;
+  line-height: 1;
+  background: rgba(255,255,255,0.04);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  min-width: 84px;
+  box-sizing: border-box;
+  transition: background 120ms ease, transform 120ms ease, box-shadow 120ms ease;
+}
+
+.bar-button:hover {
+  background: rgba(255,255,255,0.06);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.28);
+}
+
+/* radial glow element behind the bar */
+.top-bar::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -30%);
+  width: 220%;
+  height: 240%;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 40%, var(--bar-glow-inner) 0%, rgba(106,59,224,0.08) 18%, var(--bar-glow-outer) 40%, transparent 65%);
+  filter: blur(26px);
+  opacity: 1;
+  z-index: 1198;
+}
+
+/* Spacer to keep page content below the fixed bar */
+.top-bar-spacer {
+  height: 56px;
+}

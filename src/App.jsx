@@ -1,28 +1,30 @@
 import './App.css'
 import Skills from './components/Skills.tsx'
 import SimpleAccordion from './components/Accordion.tsx'
-
+import Bar from './components/Bar.tsx'
+import PictureFrame from './components/PictureFrame.tsx'
 
 function App() {
   return (
     <>
       {/* make a bar that displays github, resume, and linkedin */}
-      <hr class='colored-line' />
+      <Bar />
       <body>
         {/* Add picture of self, maybe circle with glow effect */}
-        <h1>Conner Patton</h1>
+        <PictureFrame />
+        <h1 style={{ paddingTop: '30px', fontSize: '100px' }}>
+          Conner Patton
+        </h1>
         <SimpleAccordion>
-          CS student, AI
+          I am a Computer Science & Artificial Intelligence double major looking for work primarily in the gaming industry
         </SimpleAccordion>
+        {/* Add glow effect on skills */}
         <SimpleAccordion title='Skills'>
           <Skills />
         </SimpleAccordion>
         <SimpleAccordion title='Upcoming Projects'>
-          penis
+          Game
         </SimpleAccordion>
-        <button href="https://github.com/connerpatton7">Github</button>
-        <button>Resume</button>
-        <button href="https://www.linkedin.com/in/connerpatton/" style={{ width: '50%' }}>LinkedIn</button>
       </body>
     </>
   );
