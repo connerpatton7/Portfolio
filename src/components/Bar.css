@@ -6,23 +6,24 @@
   right: 0;
   height: 56px;
   /* purple bar */
-  background: linear-gradient(180deg, #6a3be0cc, #5728c5ff);
+  background: var(--bar-bg, linear-gradient(180deg, var(--accent-secondary)cc, var(--bg-secondary) 90%));
   backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
   z-index: 1200;
-  border-bottom: 1px solid rgba(0,0,0,0.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   /* smooth transitions for border/glow */
   transition: box-shadow 260ms ease, border-color 260ms ease, background 260ms ease;
 }
 
 /* subtle persistent glow that spills into the page background */
 .top-bar {
-  --bar-glow-outer: rgba(87,40,197,0.20);
-  --bar-glow-inner: rgba(106,59,224,0.26);
-  overflow: visible; /* allow glow to spill */
+  --bar-glow-outer: var(--bar-glow-outer, rgba(87, 40, 197, 0.20));
+  --bar-glow-inner: var(--bar-glow-inner, rgba(106, 59, 224, 0.26));
+  overflow: visible;
+  /* allow glow to spill */
   /* stronger but still soft shadow + colored spill */
-  box-shadow: 0 6px 18px rgba(0,0,0,0.10), 0 3px 14px var(--bar-glow-outer);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.10), 0 3px 14px var(--bar-glow-outer);
 }
 
 .bar-inner {
@@ -38,7 +39,7 @@
 }
 
 .bar-brand {
-  color: #fff;
+  color: var(--text-primary);
   font-weight: 700;
   font-size: 25px;
   letter-spacing: 0.5px;
@@ -57,9 +58,9 @@
   padding: 6px 10px;
   height: 40px;
   line-height: 1;
-  background: rgba(255,255,255,0.04);
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
   text-decoration: none;
   font-weight: 600;
@@ -70,9 +71,21 @@
 }
 
 .bar-button:hover {
-  background: rgba(255,255,255,0.06);
+  background: rgba(255, 255, 255, 0.06);
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.28);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+}
+
+.theme-toggle {
+  background: var(--accent-primary) !important;
+  color: white !important;
+  border: 1px solid var(--accent-primary) !important;
+}
+
+.theme-toggle:hover {
+  background: var(--accent-secondary) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
 }
 
 /* radial glow element behind the bar */
@@ -86,7 +99,7 @@
   height: 260%;
   pointer-events: none;
   /* layered radial for richer, more natural glow */
-  background: radial-gradient(circle at 50% 40%, var(--bar-glow-inner) 0%, rgba(106,59,224,0.12) 12%, rgba(106,59,224,0.06) 22%, var(--bar-glow-outer) 36%, transparent 60%), radial-gradient(circle at 50% 60%, rgba(87,40,197,0.08) 0%, transparent 40%);
+  background: radial-gradient(circle at 50% 40%, var(--bar-glow-inner) 0%, rgba(106, 59, 224, 0.12) 12%, rgba(106, 59, 224, 0.06) 22%, var(--bar-glow-outer) 36%, transparent 60%), radial-gradient(circle at 50% 60%, rgba(87, 40, 197, 0.08) 0%, transparent 40%);
   filter: blur(20px);
   opacity: 0.68;
   transition: opacity 340ms ease, transform 340ms ease, filter 340ms ease;
@@ -96,8 +109,8 @@
 
 /* subtle intensification on hover for a smooth transition */
 .top-bar:hover {
-  box-shadow: 0 8px 20px rgba(0,0,0,0.10), 0 3px 12px var(--bar-glow-outer);
-  border-bottom-color: rgba(87,40,197,0.08);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.10), 0 3px 12px var(--bar-glow-outer);
+  border-bottom-color: rgba(87, 40, 197, 0.08);
 }
 
 .top-bar:hover::after {
@@ -107,8 +120,19 @@
 }
 
 @keyframes barGlowPulse {
-  0%, 100% { opacity: 0.62; transform: translate(-50%, -30%) scale(1); filter: blur(20px); }
-  50% { opacity: 0.78; transform: translate(-50%, -29%) scale(1.02); filter: blur(18px); }
+
+  0%,
+  100% {
+    opacity: 0.62;
+    transform: translate(-50%, -30%) scale(1);
+    filter: blur(20px);
+  }
+
+  50% {
+    opacity: 0.78;
+    transform: translate(-50%, -29%) scale(1.02);
+    filter: blur(18px);
+  }
 }
 
 /* Spacer to keep page content below the fixed bar */

@@ -5,7 +5,7 @@
     height: 300px;
 
     /* Add a background color to make it visible */
-    background-color: #15181b;
+    background-color: transparent;
 
     /* Optional: Center the text inside */
     display: flex;
