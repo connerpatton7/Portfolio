@@ -10,9 +10,9 @@ type SimpleAccordionProps = {
 
 function SimpleAccordion({ title = 'About Me', children }: SimpleAccordionProps) {
     return (
-        <Accordion sx={{ background: '#15181b', color: 'white', border: 'none'}}> 
-            <AccordionSummary sx={{ '& .MuiAccordionSummary-content': { justifyContent: 'center', alignItems: 'center', fontSize: '70px' }, textAlign: 'center' }}>{title}</AccordionSummary>
-            <AccordionDetails>{children}</AccordionDetails>
+        <Accordion sx={{ background: 'transparent', color: 'white', border: 'none', boxShadow: 'none' }}> 
+            <AccordionSummary sx={{ background: 'transparent', '& .MuiAccordionSummary-content': { justifyContent: 'center', alignItems: 'center', fontSize: '70px' }, textAlign: 'center' }}>{title}</AccordionSummary>
+            <AccordionDetails sx={{ background: 'transparent', color: 'white' }}>{children}</AccordionDetails>
         </Accordion>
     );
 }

@@ -7,24 +7,38 @@ import PictureFrame from './components/PictureFrame.tsx'
 function App() {
   return (
     <>
-      {/* make a bar that displays github, resume, and linkedin */}
       <Bar />
       <body>
         {/* Add picture of self, maybe circle with glow effect */}
         <PictureFrame />
-        <h1 style={{ paddingTop: '30px', fontSize: '100px' }}>
+        <h1 className="glow-header" style={{ paddingTop: '30px', fontSize: '100px' }}>
           Conner Patton
         </h1>
         <SimpleAccordion>
-          I am a Computer Science & Artificial Intelligence double major looking for work primarily in the gaming industry
+          <section className="about-section">
+            <ul className="about-bullets">
+              <li>Computer Science & AI double major</li>
+              <li>Interested in game development and graphics</li>
+              <li>Experience with C++, Python, Unity, and TypeScript</li>
+            </ul>
+          </section>
         </SimpleAccordion>
-        {/* Add glow effect on skills */}
         <SimpleAccordion title='Skills'>
           <Skills />
         </SimpleAccordion>
         <SimpleAccordion title='Upcoming Projects'>
-          Game
+          <section className="about-section">
+            <ul className="about-bullets">
+              <li>Game</li>
+            </ul>
+          </section>
         </SimpleAccordion>
+        {/* About list: edit these bullets to list things about you */}
+
+        <h1 style={{ paddingTop: '200px' }}>
+          Contact Me
+        </h1>
+
       </body>
     </>
   );
