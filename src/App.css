@@ -58,18 +58,18 @@ body {
   --bg-tertiary: #f8f9fa;
   --text-primary: #2c3e50;
   --text-secondary: #34495e;
-  --accent-primary: #3498db;
-  --accent-secondary: #2980b9;
-  --glow-color: rgba(52, 152, 219, 0.6);
-  --glow-color-light: rgba(52, 152, 219, 0.3);
-  --glow-color-lighter: rgba(52, 152, 219, 0.1);
+  --accent-primary: #6b2bf0;
+  --accent-secondary: #8050e0;
+  --glow-color: rgba(107, 43, 240, 0.6);
+  --glow-color-light: rgba(107, 43, 240, 0.3);
+  --glow-color-lighter: rgba(107, 43, 240, 0.1);
   --shadow-color: rgba(0, 0, 0, 0.2);
-  --border-color: #3498db;
+  --border-color: #6b2bf0;
 
   /* Light theme bar colors */
-  --bar-bg: linear-gradient(180deg, #3498dbcc, #ffffff 90%);
-  --bar-glow-outer: rgba(52, 152, 219, 0.3);
-  --bar-glow-inner: rgba(52, 152, 219, 0.4);
+  --bar-bg: linear-gradient(180deg, #6b2bf0cc, #ffffff 90%);
+  --bar-glow-outer: rgba(107, 43, 240, 0.3);
+  --bar-glow-inner: rgba(107, 43, 240, 0.4);
 }
 
 /* Radial-centered glow for header */
@@ -116,7 +116,6 @@ body {
 .about-section {
   margin-top: 40px;
   color: var(--text-primary);
-  max-width: 900px;
   margin-left: auto;
   margin-right: auto;
   text-align: left;
@@ -133,4 +132,47 @@ body {
 .about-bullets li {
   margin-bottom: 8px;
   text-shadow: 0 1px 2px var(--shadow-color);
+}
+
+.about-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 256px);
+  gap: 24px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.about-card {
+  position: relative;
+  z-index: 0;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.about-card::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(ellipse at center, var(--glow-color-lighter) 0%, transparent 70%);
+  filter: blur(30px);
+  opacity: 0.8;
+  border-radius: 12px;
+  pointer-events: none;
+  z-index: -1;
+  transition: filter 0.25s ease, opacity 0.25s ease, width 0.25s ease, height 0.25s ease;
+}
+
+.about-card:hover {
+  transform: translateY(-4px);
+}
+
+.about-card:hover::before {
+  filter: blur(40px);
+  width: 140%;
+  height: 140%;
+  opacity: 1;
 }

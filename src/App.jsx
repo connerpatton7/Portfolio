@@ -3,6 +3,7 @@ import Skills from './components/Skills.tsx'
 import SimpleAccordion from './components/Accordion.tsx'
 import Bar from './components/Bar.tsx'
 import PictureFrame from './components/PictureFrame.tsx'
+import AboutCard from './components/AboutCard.tsx'
 import { useState, useEffect } from 'react'
 
 function App() {
@@ -25,19 +26,23 @@ function App() {
       <Bar toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
       <body>
         {/* Add picture of self, maybe circle with glow effect */}
-        <div style={{ padding: '50px 50px 0 50px' }}>
-          <PictureFrame class="glow-header" />
-          <h1 style={{ paddingTop: '30px', fontSize: '100px' }}>
-            Conner Patton
-          </h1>
+        <div style={{ padding: '50px 50px 0 50px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '60px', maxWidth: '1400px', margin: '0 auto' }}>
+          <div style={{ flex: '0 0 auto' }}>
+            <PictureFrame class="glow-header" />
+          </div>
+          <div style={{ flex: '1', textAlign: 'left' }}>
+            <h1 style={{ marginLeft: '150px', fontSize: '100px' }}>
+              Hello, I Am Conner Patton
+            </h1>
+          </div>
         </div>
-        <SimpleAccordion>
+        <SimpleAccordion style={{ marginTop: '0px'}}>
           <section className="about-section">
-            <ul className="about-bullets">
-              <li>Computer Science & AI double major</li>
-              <li>Interested in game development and graphics</li>
-              <li>Experience with C++, Python, Unity, and TypeScript</li>
-            </ul>
+            <div className="about-cards-container">
+              <AboutCard text="Computer Science & AI double major" />
+              <AboutCard text="Interested in game development and graphics" />
+              <AboutCard text="Experience with C++, Python, Unity, and TypeScript" />
+            </div>
           </section>
         </SimpleAccordion>
         <SimpleAccordion title='Skills'>
