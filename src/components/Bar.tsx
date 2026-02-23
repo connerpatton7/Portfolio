@@ -1,13 +1,22 @@
 import './Bar.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import ohio from '/src/assets/Arched Ohio White.svg';
 
-interface BarProps {
-    toggleTheme: () => void;
-    isDarkMode: boolean;
-}
-
-function Bar({ toggleTheme, isDarkMode }: BarProps) {
+function Bar() {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isOu, setIsOu] = useState(false);
+
+    useEffect(() => {
+        setIsOu(document.documentElement.classList.contains('ou-theme'))
+    }, [])
+
+    const toggleOu = () => {
+        const el = document.documentElement
+        const next = !el.classList.contains('ou-theme')
+        if (next) el.classList.add('ou-theme')
+        else el.classList.remove('ou-theme')
+        setIsOu(next)
+    }
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
@@ -18,8 +27,8 @@ function Bar({ toggleTheme, isDarkMode }: BarProps) {
                 <div className="bar-inner">
                     <div className="bar-brand">Conner Patton</div>
                     <div className="bar-actions">
-                        <button className="bar-button theme-toggle" onClick={toggleTheme}>
-                            {isDarkMode ? '☀️ Light' : '🌙 Dark'}
+                        <button className={`bar-button ou-toggle ${isOu ? 'active' : ''}`} onClick={toggleOu} aria-pressed={isOu} aria-label="OU theme">
+                            <img src={ohio} alt="OU" className="ou-icon" />
                         </button>
                         <a className="bar-button" href="https://github.com/connerpatton7" target="_blank" rel="noreferrer">Github</a>
                         <button className="bar-button" onClick={openModal}>Resume</button>

@@ -5,16 +5,40 @@
   left: 0;
   right: 0;
   height: 56px;
-  /* transparent bar */
-  background: transparent;
+  /* bar background controlled by theme variable so it can match across modes */
+  background: var(--bar-bg, transparent);
   backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
   z-index: 1200;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   /* smooth transitions for border/glow */
   transition: box-shadow 260ms ease, border-color 260ms ease, background 260ms ease;
 }
+
+/* OU theme: larger header layout and prominent logo */
+.ou-theme .top-bar {
+  height: 96px;
+  padding: 0 18px;
+  align-items: center;
+}
+
+.ou-theme .bar-inner {
+  max-width: 1600px;
+}
+
+.ou-theme .bar-brand {
+  width: 220px;
+  height: 72px;
+  background-image: url('/src/assets/Ohio Primary Cutler.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left center;
+  color: transparent;
+  font-size: 0.1px;
+}
+
+.ou-theme .bar-actions { gap: 14px; }
 
 /* subtle persistent glow that spills into the page background */
 .top-bar {
@@ -39,7 +63,7 @@
 }
 
 .bar-brand {
-  color: var(--text-primary);
+  color: var(--text-secondary);
   font-weight: 700;
   font-size: 25px;
   letter-spacing: 0.5px;
@@ -59,7 +83,7 @@
   height: 40px;
   line-height: 1;
   background: rgba(255, 255, 255, 0.04);
-  color: var(--text-primary);
+  color: var(--text-secondary);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
   text-decoration: none;
@@ -86,6 +110,24 @@
   background: var(--accent-secondary) !important;
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+}
+
+/* OU toggle button styling */
+.ou-toggle.active {
+  background: var(--accent-primary) !important;
+  color: white !important;
+  border: 1px solid var(--accent-primary) !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+}
+.ou-toggle:hover { background: var(--accent-secondary) !important; transform: translateY(-2px); }
+
+/* icon inside OU button */
+.ou-toggle .ou-icon {
+  width: 26px;
+  height: 26px;
+  display: block;
+  object-fit: contain;
+  border-radius: 4px;
 }
 
 /* radial glow element behind the bar */
@@ -135,89 +177,37 @@
   }
 }
 
+/* OU theme overrides: top bar and button styles */
+.ou-theme .top-bar {
+  background: #024230 !important;
+  border-bottom-color: rgba(0,0,0,0.12);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12), 0 3px 14px rgba(0,0,0,0.04);
+}
+
+.ou-theme .top-bar .bar-brand { color: #ffffff; }
+
+.ou-theme .bar-button {
+  background: #ffffff !important;
+  color: #024230 !important;
+  border-color: rgba(0,0,0,0.06) !important;
+  box-shadow: none !important;
+}
+
+.ou-theme .bar-button:hover {
+  background: #f6f9f7 !important;
+  transform: translateY(-2px);
+}
+
+.ou-theme .ou-toggle.active {
+  background: #013826 !important;
+  color: #ffffff !important;
+  border-color: #013826 !important;
+}
+
+
 /* Spacer to keep page content below the fixed bar */
 .top-bar-spacer {
   height: 56px;
-}
-
-/* Modal overlay styles */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.85);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-  backdrop-filter: blur(4px);
-  animation: fadeIn 0.2s ease;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-.modal-content {
-  position: relative;
-  width: 90%;
-  max-width: 1000px;
-  height: 90vh;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-  overflow: hidden;
-  animation: slideUp 0.3s ease;
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(50px);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.modal-close {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 40px;
-  height: 40px;
-  border: none;
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-  border-radius: 50%;
-  font-size: 24px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2001;
-  transition: background 0.2s ease, transform 0.2s ease;
-}
-
-.modal-close:hover {
-  background: rgba(0, 0, 0, 0.8);
-  transform: scale(1.1);
-}
-
-.pdf-viewer {
-  width: 100%;
-  height: 100%;
-  border: none;
 }
 
 /* Modal overlay styles */

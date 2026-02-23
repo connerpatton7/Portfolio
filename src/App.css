@@ -36,6 +36,12 @@ body {
 :root {
   --main-spacing: 16px;
 
+  /* UI surface colors independent from background */
+  --ui-surface: rgba(255, 255, 255, 0.04);
+  --ui-surface-strong: rgba(255, 255, 255, 0.06);
+  --ui-foreground: #ffffff;
+  --ui-text-contrast: #ffffff;
+
   /* Dark theme colors */
   --bg-primary: conic-gradient(from -90deg at 110% 100%, #15181b 0deg, #16181d 90deg, #16181d 1turn);
   --bg-secondary: #2b303b;
@@ -44,32 +50,47 @@ body {
   --text-secondary: #ffffff;
   --accent-primary: #5b1df0;
   --accent-secondary: #6a3be0;
+  --accent-primary-dark: #4516c2;
+
+  /* hero/gradient colors (derived from accents) */
+  --hero-start: rgba(69, 22, 194, 0.95);
+  /* accent-primary-dark */
+  --hero-mid: rgba(91, 29, 240, 0.9);
+  /* accent-primary */
+  --hero-end: rgba(91, 29, 240, 0.45);
   --glow-color: rgba(91, 29, 240, 0.55);
   --glow-color-light: rgba(91, 29, 240, 0.25);
   --glow-color-lighter: rgba(91, 29, 240, 0.08);
+  /* top-bar background to ensure consistent dark appearance */
+  --bar-bg: rgba(10, 10, 18--, 0.95);
   --shadow-color: rgba(0, 0, 0, 0.6);
   --border-color: #ffffff;
+  --border-faint: rgba(255, 255, 255, 0.06);
 }
 
-/* Light theme */
-.light-theme {
-  --bg-primary: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  --bg-secondary: #ffffff;
-  --bg-tertiary: #f8f9fa;
-  --text-primary: #2c3e50;
-  --text-secondary: #34495e;
-  --accent-primary: #6b2bf0;
-  --accent-secondary: #8050e0;
-  --glow-color: rgba(107, 43, 240, 0.6);
-  --glow-color-light: rgba(107, 43, 240, 0.3);
-  --glow-color-lighter: rgba(107, 43, 240, 0.1);
-  --shadow-color: rgba(0, 0, 0, 0.2);
-  --border-color: #6b2bf0;
+.ou-theme {
+  --bg-primary: conic-gradient(from -90deg at 110% 100%, #15181b 0deg, #16181d 90deg, #16181d 1turn);
+  --bg-secondary: #2b303b;
+  --bg-tertiary: #16181d;
+  --text-primary: #ffffff;
+  --text-secondary: #ffffff;
+  --accent-primary: #00694E;
+  --accent-secondary: #2b8f6a;
+  --accent-primary-dark: #004c3a;
 
-  /* Light theme bar colors */
-  --bar-bg: linear-gradient(180deg, #6b2bf0cc, #ffffff 90%);
-  --bar-glow-outer: rgba(107, 43, 240, 0.3);
-  --bar-glow-inner: rgba(107, 43, 240, 0.4);
+  /* hero/gradient colors (derived from accents) */
+  --hero-start: rgba(0, 76, 58, 0.95);
+  --hero-mid: rgba(0, 105, 78, 0.9);
+  --hero-end: rgba(0, 105, 78, 0.45);
+  --glow-color: rgba(0, 105, 78, 0.55);
+  --glow-color-light: rgba(0, 105, 78, 0.25);
+  --glow-color-lighter: rgba(0, 105, 78, 0.08);
+  /* top-bar background to ensure consistent dark appearance */
+  --bar-bg: rgba(10, 10, 18, 0.95);
+  --shadow-color: rgba(0, 0, 0, 0.6);
+  --border-color: #ffffff;
+  --border-faint: rgba(255, 255, 255, 0.06);
+  font-family: 'Fraunces', 'Termina', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 /* Radial-centered glow for header */
@@ -92,14 +113,15 @@ body {
   transform: translate(-50%, -50%);
   width: 200vw;
   height: 60vh;
-  background: radial-gradient(ellipse at center, var(--glow-color) 0%, var(--glow-color-light) 25%, var(--glow-color-lighter) 50%, transparent 65%);
+  background: radial-gradient(ellipse at center, var(--hero-mid) 0%, var(--hero-start) 30%, var(--hero-end) 65%, transparent 80%);
   filter: blur(60px);
   opacity: 0.95;
   border-radius: 50%;
   pointer-events: none;
   z-index: -1;
   transition: filter 0.25s ease, opacity 0.25s ease, width 0.25s ease, height 0.25s ease;
-  mix-blend-mode: screen;
+  /* Do not blend with page background so glow appears consistent */
+  mix-blend-mode: none;
 }
 
 .glow-header:hover {
@@ -112,6 +134,150 @@ body {
   height: 70vh;
 }
 
+/* Centered faint purple glow for main header container */
+.glow-container {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.glow-container::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 160%;
+  height: 160%;
+  background: radial-gradient(circle at center, var(--hero-mid) 0%, var(--hero-start) 20%, var(--hero-end) 48%, transparent 70%);
+  filter: blur(80px);
+  opacity: 0.85;
+  border-radius: 8px;
+  pointer-events: none;
+  z-index: -1;
+  transition: filter 0.25s ease, opacity 0.25s ease, width 0.25s ease, height 0.25s ease;
+  /* Make glow independent from the background for consistent appearance */
+  mix-blend-mode: none;
+}
+
+/* OU theme hero: split background imagery and block-style header */
+.ou-theme .glow-container {
+  min-height: 420px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.ou-theme .glow-container::before {
+  /* left/right split using two images from assets */
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  transform: none;
+  border-radius: 0;
+  background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)),
+    url('/src/assets/fatconner.JPG') left center / 50% 100% no-repeat,
+    url('/src/assets/Resume 1_18_26.pdf') right center / 50% 100% no-repeat;
+  filter: none;
+  opacity: 1;
+}
+
+.ou-theme .glow-header::before { opacity: 0; }
+
+.ou-theme .glow-container h1,
+.ou-theme .glow-container h2 {
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+
+.ou-theme .glow-container .bar-inner { max-width: 1600px }
+
+/* Inline accordion row: collapsed panels shrink, expanded panel grows */
+.accordion-row {
+  position: relative;
+  display: flex;
+  gap: 20px;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1400px;
+  margin: 24px auto;
+  padding: 0 16px;
+  overflow: visible;
+}
+
+.accordion-row .MuiAccordion-root {
+  position: relative;
+  z-index: 5;
+  flex: 1 1 0;
+  min-width: 120px;
+  transition: flex 0.5s cubic-bezier(.2, .8, .2, 1), min-width 0.45s, transform 0.35s ease, opacity 0.35s ease;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: none;
+  border: 1px solid var(--border-faint);
+  background: var(--ui-surface);
+}
+
+/* When expanded, make the panel absolute and fill the row, overlapping others */
+.accordion-row .MuiAccordion-root.Mui-expanded {
+  z-index: 20;
+  flex: 6 1 0;
+  min-width: 380px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.18);
+  border: 2px solid var(--border-color);
+  background: var(--ui-surface-strong);
+}
+
+/* Visually center expanded left/right panels by translating them into the middle slot.
+   This keeps DOM order intact and provides a smooth visual shift. */
+.accordion-row:has(.MuiAccordion-root.Mui-expanded) .MuiAccordion-root.Mui-expanded {
+  transition: transform 420ms cubic-bezier(.2, .8, .2, 1), flex 420ms cubic-bezier(.2, .8, .2, 1);
+}
+
+/* Move first panel to center when expanded */
+.accordion-row .MuiAccordion-root.Mui-expanded:nth-child(1) {
+  transform: translateX(183px);
+}
+
+/* Move third panel to center when expanded */
+.accordion-row .MuiAccordion-root.Mui-expanded:nth-child(3) {
+  transform: translateX(-183px);
+}
+
+/* De-emphasize non-expanded panels while one is open */
+
+.accordion-row .MuiAccordion-root:not(.Mui-expanded) {
+  /* remove full-element opacity so text remains fully bright */
+  transform: scale(0.985);
+  pointer-events: auto;
+  cursor: pointer;
+  filter: brightness(0.96);
+}
+
+/* When any panel is expanded, hide the other panels completely */
+.accordion-row:has(.MuiAccordion-root.Mui-expanded) .MuiAccordion-root:not(.Mui-expanded) {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: none;
+}
+
+/* When using flex-based expansion, normal document flow keeps content below visible so no extra padding is needed */
+
+.accordion-row .MuiAccordionSummary-content {
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+}
+
+.accordion-row .MuiAccordionDetails-root {
+  height: 100%;
+  display: block;
+  padding: 24px;
+}
+
 /* About bullets below accordion */
 .about-section {
   margin-top: 40px;
@@ -119,19 +285,6 @@ body {
   margin-left: auto;
   margin-right: auto;
   text-align: left;
-}
-
-.about-bullets {
-  list-style-type: disc;
-  padding-left: 2rem;
-  font-size: 24px;
-  line-height: 1.6;
-  margin: 0;
-}
-
-.about-bullets li {
-  margin-bottom: 8px;
-  text-shadow: 0 1px 2px var(--shadow-color);
 }
 
 .about-cards-container {
@@ -157,7 +310,7 @@ body {
   transform: translate(-50%, -50%);
   width: 120%;
   height: 120%;
-  background: radial-gradient(ellipse at center, var(--glow-color-lighter) 0%, transparent 70%);
+  box-shadow: 10px;
   filter: blur(30px);
   opacity: 0.8;
   border-radius: 12px;
@@ -175,4 +328,67 @@ body {
   width: 140%;
   height: 140%;
   opacity: 1;
+}
+
+/* Bottom contact bar: hidden by default, slides up when `.visible` is applied */
+.bottom-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  transform: translateY(110%);
+  transition: transform 320ms cubic-bezier(.2, .9, .2, 1), opacity 240ms ease;
+  opacity: 0;
+  z-index: 60;
+  background-color: var(--bar-bg, rgba(12, 12, 12, 0.92));
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+  backdrop-filter: blur(8px) saturate(115%);
+  -webkit-backdrop-filter: blur(8px) saturate(115%);
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow: 0 -10px 30px rgba(11, 12, 17, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+.bottom-bar.visible {
+  transform: translateY(0%);
+  opacity: 1;
+}
+
+.bottom-bar .bar-inner {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottom-bar-spacer {
+  height: 96px;
+  /* keeps page content above footer */
+}
+
+@media (max-width: 640px) {
+  .bottom-bar {
+    height: 72px;
+  }
+
+  .bottom-bar-spacer {
+    height: 92px;
+  }
+
+  .bottom-bar .bar-inner {
+    padding: 0 12px;
+    font-size: 14px;
+  }
+}
+
+/* subtle text style */
+.bottom-bar .bar-inner>div {
+  font-size: 16px;
+  color: var(--ui-text-contrast, #fff);
+  opacity: 0.95
 }
