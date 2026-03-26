@@ -5,11 +5,22 @@ body {
   margin: 0;
   color: var(--text-primary);
   text-align: center;
-  font-size: 100px;
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: middle;
   padding: 0;
+}
+
+/* Prevent layout jump when vertical scrollbar appears/disappears and optionally hide scrollbar */
+html, body {
+  scrollbar-gutter: stable;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Hide scrollbar in WebKit browsers while preserving scroll behavior */
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  display: none;
 }
 
 .colored-line {
@@ -142,6 +153,44 @@ body {
   overflow: hidden;
 }
 
+/* Hero inner layout: responsive, constrained width and flexible content */
+.hero-inner {
+  padding: 40px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hero-image {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-text {
+  flex: 1 1 auto;
+  text-align: left;
+}
+
+.hero-title {
+  margin: 0 0 12px 0;
+  font-size: clamp(2rem, 6vw, 4rem);
+  line-height: 1.02;
+  white-space: nowrap;
+  overflow-wrap: normal;
+}
+
+.hero-subtitle {
+  margin: 0;
+  font-size: clamp(1rem, 2.2vw, 1.1rem);
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
 .glow-container::before {
   content: "";
   position: absolute;
@@ -169,26 +218,29 @@ body {
 }
 
 .ou-theme .glow-container::before {
-  /* left/right split using two images from assets */
+  /* plain white background for OU theme (removed image assets) */
   width: 100%;
   height: 100%;
   left: 0;
   top: 0;
   transform: none;
   border-radius: 0;
-  background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)),
-    url('/src/assets/fatconner.JPG') left center / 50% 100% no-repeat,
-    url('/src/assets/Resume 1_18_26.pdf') right center / 50% 100% no-repeat;
+  background: #ffffff;
   filter: none;
   opacity: 1;
 }
 
 .ou-theme .glow-header::before { opacity: 0; }
 
+/* Ensure all text inside the white OU hero area is dark for readability */
+.ou-theme .glow-container {
+  color: #111827;
+}
+
 .ou-theme .glow-container h1,
 .ou-theme .glow-container h2 {
-  color: #ffffff;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  color: inherit;
+  text-shadow: none;
 }
 
 .ou-theme .glow-container .bar-inner { max-width: 1600px }

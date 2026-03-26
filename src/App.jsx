@@ -4,6 +4,7 @@ import SimpleAccordion from './components/Accordion.tsx'
 import Bar from './components/Bar.tsx'
 import PictureFrame from './components/PictureFrame.tsx'
 import AboutCard from './components/AboutCard.tsx'
+import ProjectSkills from './components/ProjectSkills.tsx'
 import { useState, useEffect } from 'react'
 
 function App() {
@@ -31,19 +32,21 @@ function App() {
   return (
     <>
       <Bar />
-      <body>
+      <main>
         {/* Add picture of self, maybe circle with glow effect */}
-        <div className="glow-container" style={{ padding: '50px 50px 50px 50px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '60px', maxWidth: '1900px', margin: '0 auto' }}>
-          <div style={{ flex: '0 0 auto' }}>
-            <PictureFrame class="glow-header" />
-          </div>
-          <div style={{ flex: '1', textAlign: 'left' }}>
-            <h1 style={{ marginLeft: '150px', fontSize: '100px' }}>
-              Hello, I Am Conner Patton
-            </h1>
-            <h1 style={{ marginLeft: '250px', fontSize: '30px'}}>
-              (A Computer Science & Artificial Intelligence student at Ohio University)
-            </h1>
+        <div className="glow-container">
+          <div className="hero-inner">
+            <div className="hero-image">
+              <PictureFrame className="glow-header" />
+            </div>
+            <div className="hero-text">
+              <h1 className="hero-title">
+                Hello, I Am Conner Patton
+              </h1>
+              <h2 className="hero-subtitle">
+                (A Computer Science & Artificial Intelligence student at Ohio University)
+              </h2>
+            </div>
           </div>
         </div>
         <div className="accordion-row">
@@ -51,7 +54,7 @@ function App() {
             <section className="about-section">
               <div className="about-cards-container">
                 <AboutCard text="Computer Science & AI double major" />
-                <AboutCard text="Interested in game development and graphics" />
+                <AboutCard text="Primarily interested in game development and graphics, but always willing to learn!" />
                 <AboutCard text="Experience with C++, Python, Unity, Godot, and TypeScript" />
               </div>
             </section>
@@ -60,11 +63,7 @@ function App() {
             <Skills />
           </SimpleAccordion>
           <SimpleAccordion title='Projects' expanded={expandedPanel === 'panel3'} onChange={handlePanelChange('panel3')}>
-            <section className="about-section">
-              <div className="about-cards-container">
-                <AboutCard text="Wizards of Destiny" />
-              </div>
-            </section>
+            <ProjectSkills />
           </SimpleAccordion>
         </div>
         <div className="bottom-bar-spacer" />
@@ -75,7 +74,7 @@ function App() {
             </div>
           </div>
         </footer>
-      </body>
+      </main>
     </>
   );
 }

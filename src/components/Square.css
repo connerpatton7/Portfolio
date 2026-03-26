@@ -41,12 +41,12 @@
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%) scale(0.8);
-    width: 160%;
-    height: 160%;
+    transform: translate(-50%, -50%) scale(var(--glow-scale, 0.8));
+    width: var(--glow-size-x, 160%);
+    height: var(--glow-size-y, 160%);
     pointer-events: none;
-    border-radius: 50%;
-    background: var(--glow-gradient, radial-gradient(circle at center, var(--glow-color, rgba(148,0,255,0.32)) 0%, var(--glow-mid, rgba(148,0,255,0.18)) 25%, var(--glow-fade, rgba(148,0,255,0.06)) 45%, transparent 55%));
+    border-radius: var(--glow-radius, 50%);
+    background: var(--glow-gradient, radial-gradient(ellipse at center, var(--glow-color, rgba(148,0,255,0.32)) 0%, var(--glow-mid, rgba(148,0,255,0.18)) 25%, var(--glow-fade, rgba(148,0,255,0.06)) 45%, transparent 55%));
     opacity: 0;
     transition: opacity 200ms ease, transform 200ms ease;
     z-index: -1;
@@ -54,7 +54,7 @@
 
 .square:hover::before {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) scale(var(--glow-scale-hover, 1));
 }
 
 .square:hover {

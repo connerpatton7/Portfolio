@@ -43,7 +43,7 @@ function Bar() {
                     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                         <button className="modal-close" onClick={closeModal}>✕</button>
                         <iframe
-                            src="/src/assets/Resume 1_18_26.pdf"
+                            src="/src/assets/Resume 3_20_2026 (1).pdf"
                             className="pdf-viewer"
                             title="Resume"
                         />

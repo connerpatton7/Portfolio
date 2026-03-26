@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import conner from '/src/assets/fatconner.JPG';
+import conner from '/src/assets/headshot.jpg';
 import fart from '/src/assets/Fart sound effect.mp3';
 import './PictureFrame.css';
 

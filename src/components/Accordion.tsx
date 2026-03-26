@@ -31,9 +31,11 @@ function SimpleAccordion({ title = 'About Me', children, expanded, onChange }: S
                         fontSize: '60px',
                         transition: 'font-size 180ms ease, color 180ms ease',
                         color: 'inherit',
+                        height: '150px',
                     },
                     // When expanded, keep the purple bar as a top divider (rounded top corners only)
                     '&.Mui-expanded': {
+                        height: '200px',
                         background: 'var(--accent-primary-dark)',
                         color: 'white !important',
                         borderRadius: '10px 10px 0 0',
@@ -47,7 +49,7 @@ function SimpleAccordion({ title = 'About Me', children, expanded, onChange }: S
             >
                 {title}
             </AccordionSummary>
-            <AccordionDetails sx={{ background: 'transparent', color: 'var(--text-primary)', padding: '24px' }}>
+            <AccordionDetails sx={{ background: 'transparent', color: 'var(--text-primary)', padding: '24px', maxHeight: '400px',}}>
                 {children}
             </AccordionDetails>
         </Accordion>

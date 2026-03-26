@@ -10,10 +10,17 @@ interface SkillsCellProps {
     className?: string;
     glowColor?: string;
     glowStrength?: number;
+    glowSpread?: number;
+    /** Explicit glow size for X (percent). Example: 140 => '140%' */
+    glowSizeX?: number;
+    /** Explicit glow size for Y (percent). Example: 90 => '90%' */
+    glowSizeY?: number;
+    /** Optional glow border-radius for the pseudo element (e.g. '50%' or '50% / 40%') */
+    glowRadius?: string;
     glowGradient?: string;
 }
 
-const Cell: React.FC<SkillsCellProps> = ({ imageSrc, imageCell, imageAlt = 'skill', label = 'Square', className = '', glowColor, glowGradient, glowStrength }) => {
+const Cell: React.FC<SkillsCellProps> = ({ imageSrc, imageCell, imageAlt = 'skill', label = 'Square', className = '', glowColor, glowGradient, glowStrength, glowSpread, glowSizeX, glowSizeY, glowRadius }) => {
     const src = imageSrc ?? imageCell;
 
     // helper: parse hex (#rrggbb or #rgb) or rgb/rgba(...) into {r,g,b}
@@ -59,6 +66,28 @@ const Cell: React.FC<SkillsCellProps> = ({ imageSrc, imageCell, imageAlt = 'skil
             // fallback: use provided string for the main stop and keep defaults for others
             style = { ['--glow-color' as any]: glowColor } as React.CSSProperties;
         }
+    }
+
+    // allow controlling how far the glow spreads (multiplier). default is 1 -> 160%
+    const spreadMultiplier = typeof glowSpread === 'number' ? glowSpread : undefined;
+    if (typeof spreadMultiplier === 'number') {
+        const baseSize = 160; // percent used in CSS by default
+        const initialScale = 0.8 * spreadMultiplier;
+        const hoverScale = 1 * spreadMultiplier;
+        const sizePercent = `${Math.round(baseSize * spreadMultiplier)}%`;
+        style = { ...(style || {}), ['--glow-scale' as any]: initialScale, ['--glow-scale-hover' as any]: hoverScale, ['--glow-size-x' as any]: sizePercent, ['--glow-size-y' as any]: sizePercent } as React.CSSProperties;
+    }
+
+    // explicit per-axis sizes (percent) override spread-based size if provided
+    if (typeof glowSizeX === 'number') {
+        style = { ...(style || {}), ['--glow-size-x' as any]: `${glowSizeX}%` } as React.CSSProperties;
+    }
+    if (typeof glowSizeY === 'number') {
+        style = { ...(style || {}), ['--glow-size-y' as any]: `${glowSizeY}%` } as React.CSSProperties;
+    }
+
+    if (typeof glowRadius === 'string') {
+        style = { ...(style || {}), ['--glow-radius' as any]: glowRadius } as React.CSSProperties;
     }
 
     // allow an explicit CSS radial-gradient override for multi-color glows

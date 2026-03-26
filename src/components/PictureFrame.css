@@ -31,3 +31,9 @@
 
 .avatar { cursor: pointer; }
 
+/* When the OU theme is active, make the avatar border the OU green */
+.ou-theme .avatar {
+  border-color: #00694E;
+  box-shadow: 0 10px 30px rgba(0,105,78,0.08), 0 0 18px rgba(0,105,78,0.06);
+}
+

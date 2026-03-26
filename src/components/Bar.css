@@ -16,30 +16,6 @@
   transition: box-shadow 260ms ease, border-color 260ms ease, background 260ms ease;
 }
 
-/* OU theme: larger header layout and prominent logo */
-.ou-theme .top-bar {
-  height: 96px;
-  padding: 0 18px;
-  align-items: center;
-}
-
-.ou-theme .bar-inner {
-  max-width: 1600px;
-}
-
-.ou-theme .bar-brand {
-  width: 220px;
-  height: 72px;
-  background-image: url('/src/assets/Ohio Primary Cutler.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: left center;
-  color: transparent;
-  font-size: 0.1px;
-}
-
-.ou-theme .bar-actions { gap: 14px; }
-
 /* subtle persistent glow that spills into the page background */
 .top-bar {
   --bar-glow-outer: var(--bar-glow-outer, rgba(87, 40, 197, 0.20));
