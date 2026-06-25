@@ -1,8 +1,20 @@
 {
-  "name": "showcase",
-  "private": true,
+  "name": "y",
   "version": "0.0.0",
+  "private": true,
+  "description": "my website cuh",
+  "homepage": "https://github.com/connerpatton7/Portfolio#readme",
+  "bugs": {
+    "url": "https://github.com/connerpatton7/Portfolio/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/connerpatton7/Portfolio.git"
+  },
+  "license": "ISC",
+  "author": "",
   "type": "module",
+  "main": "eslint.config.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

@@ -1,3 +1,34 @@
+/* Animatable custom color properties for glow effects */
+@property --glow-l {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: rgba(10, 22, 100, 0.55);
+}
+@property --glow-r {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: rgba(200, 90, 70, 0.45);
+}
+
+@keyframes shiftBlue {
+  0%   { --glow-l: rgba(10, 22, 100, 0.55); }
+  30%  { --glow-l: rgba(18, 40, 148, 0.62); }
+  60%  { --glow-l: rgba(7,  16,  78, 0.50); }
+  100% { --glow-l: rgba(10, 22, 100, 0.55); }
+}
+@keyframes shiftMagenta {
+  0%   { --glow-r: rgba(148, 22, 160, 0.50); }
+  30%  { --glow-r: rgba(170, 30, 180, 0.56); }
+  65%  { --glow-r: rgba(120, 15, 135, 0.44); }
+  100% { --glow-r: rgba(148, 22, 160, 0.50); }
+}
+@keyframes shiftCoral {
+  0%   { --glow-r: rgba(210, 100, 75, 0.38); }
+  35%  { --glow-r: rgba(232, 118, 88, 0.44); }
+  70%  { --glow-r: rgba(190,  82, 60, 0.34); }
+  100% { --glow-r: rgba(210, 100, 75, 0.38); }
+}
+
 body {
   font-family: Lato, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   background: var(--bg-primary);
@@ -27,7 +58,8 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
   border: none;
   margin-top: 0px;
   height: 50px;
-  background-color: var(--accent-primary);
+  background: linear-gradient(90deg, #0c1844 0%, #16181d 50%, #c4735a 100%);
+  opacity: 0.55;
 }
 
 .button {
@@ -54,26 +86,27 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
   --ui-text-contrast: #ffffff;
 
   /* Dark theme colors */
-  --bg-primary: conic-gradient(from -90deg at 110% 100%, #15181b 0deg, #16181d 90deg, #16181d 1turn);
+  --bg-primary: #16181d;
   --bg-secondary: #2b303b;
   --bg-tertiary: #16181d;
   --text-primary: #ffffff;
   --text-secondary: #ffffff;
-  --accent-primary: #5b1df0;
-  --accent-secondary: #6a3be0;
-  --accent-primary-dark: #4516c2;
+  --accent-primary: #8c5240;
+  --accent-secondary: #a05c48;
+  --accent-primary-dark: #6a3a2c;
 
-  /* hero/gradient colors (derived from accents) */
-  --hero-start: rgba(69, 22, 194, 0.95);
-  /* accent-primary-dark */
-  --hero-mid: rgba(91, 29, 240, 0.9);
-  /* accent-primary */
-  --hero-end: rgba(91, 29, 240, 0.45);
-  --glow-color: rgba(91, 29, 240, 0.55);
-  --glow-color-light: rgba(91, 29, 240, 0.25);
-  --glow-color-lighter: rgba(91, 29, 240, 0.08);
+  /* hero/gradient colors (blue left → bg dark center → coral right) */
+  --hero-start: rgba(10, 20, 90, 0.85);
+  /* deep blue — far left origin */
+  --hero-mid: rgba(22, 24, 29, 0.22);
+  /* bg dark — center origin */
+  --hero-end: rgba(210, 100, 75, 0.52);
+  /* light coral — far right origin */
+  --glow-color: rgba(210, 100, 75, 0.38);
+  --glow-color-light: rgba(210, 100, 75, 0.18);
+  --glow-color-lighter: rgba(210, 100, 75, 0.07);
   /* top-bar background to ensure consistent dark appearance */
-  --bar-bg: rgba(10, 10, 18--, 0.95);
+  --bar-bg: rgba(10, 10, 18, 0.95);
   --shadow-color: rgba(0, 0, 0, 0.6);
   --border-color: #ffffff;
   --border-faint: rgba(255, 255, 255, 0.06);
@@ -124,14 +157,15 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
   transform: translate(-50%, -50%);
   width: 200vw;
   height: 60vh;
-  background: radial-gradient(ellipse at center, var(--hero-mid) 0%, var(--hero-start) 30%, var(--hero-end) 65%, transparent 80%);
+  background:
+    radial-gradient(ellipse 35% 100% at 0% 50%,   rgba(10, 20, 90, 0.52) 0%, transparent 65%),
+    radial-gradient(ellipse 35% 100% at 100% 50%, rgba(210, 100, 75, 0.46) 0%, transparent 65%);
   filter: blur(60px);
   opacity: 0.95;
   border-radius: 50%;
   pointer-events: none;
   z-index: -1;
   transition: filter 0.25s ease, opacity 0.25s ease, width 0.25s ease, height 0.25s ease;
-  /* Do not blend with page background so glow appears consistent */
   mix-blend-mode: none;
 }
 
@@ -194,20 +228,24 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
 .glow-container::before {
   content: "";
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 160%;
-  height: 160%;
-  background: radial-gradient(circle at center, var(--hero-mid) 0%, var(--hero-start) 20%, var(--hero-end) 48%, transparent 70%);
-  filter: blur(80px);
-  opacity: 0.85;
-  border-radius: 8px;
+  left: 0;
+  top: 0;
+  transform: none;
+  width: 100%;
+  height: 100%;
+  --glow-l: rgba(26, 38, 126, 0.58);
+  --glow-r: rgba(148, 22, 160, 0.50);
+  background:
+    radial-gradient(ellipse 55% 140% at 0%   50%, var(--glow-l) 0%, transparent 70%),
+    radial-gradient(ellipse 45% 100% at 50%  50%, rgba(22, 24, 29, 0.28) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 140% at 100% 50%, var(--glow-r) 0%, transparent 70%);
+  filter: blur(50px);
+  opacity: 0.90;
   pointer-events: none;
   z-index: -1;
-  transition: filter 0.25s ease, opacity 0.25s ease, width 0.25s ease, height 0.25s ease;
-  /* Make glow independent from the background for consistent appearance */
+  transition: filter 0.25s ease, opacity 0.25s ease;
   mix-blend-mode: none;
+  animation: shiftBlue 10s ease-in-out infinite, shiftMagenta 13s ease-in-out infinite;
 }
 
 /* OU theme hero: split background imagery and block-style header */
@@ -268,7 +306,7 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
   border-radius: 12px;
   box-shadow: none;
   border: 1px solid var(--border-faint);
-  background: var(--ui-surface);
+  background: transparent;
 }
 
 /* When expanded, make the panel absolute and fill the row, overlapping others */
@@ -322,6 +360,34 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
   justify-content: center;
   align-items: center;
   font-size: 28px;
+}
+
+/* Three-origin glow on accordion headers mirroring the glow-container theme */
+.accordion-row .MuiAccordionSummary-root {
+  position: relative;
+  overflow: hidden;
+}
+
+.accordion-row .MuiAccordionSummary-root::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  --glow-l: rgba(7, 27, 177, 0.45);
+  --glow-r: rgba(210, 100, 75, 0.38);
+  background:
+    radial-gradient(ellipse 60% 200% at 0%   50%, var(--glow-l) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 160% at 50%  50%, rgba(22, 24, 29, 0.20) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 200% at 100% 50%, var(--glow-r) 0%, transparent 70%);
+  filter: blur(12px);
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.3s ease;
+  animation: shiftBlue 12s ease-in-out infinite 1.5s, shiftCoral 120s ease-in-out infinite;
+}
+
+.accordion-row .MuiAccordionSummary-root > * {
+  position: relative;
+  z-index: 1;
 }
 
 .accordion-row .MuiAccordionDetails-root {
@@ -438,9 +504,14 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
   }
 }
 
-/* subtle text style */
 .bottom-bar .bar-inner>div {
   font-size: 16px;
   color: var(--ui-text-contrast, #fff);
   opacity: 0.95
+}
+
+.demo-header {
+  font-size: 60px;
+  margin-top: 100px;
+  
 }

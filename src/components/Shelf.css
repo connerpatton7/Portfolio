@@ -1,0 +1,31 @@
+.shelf-root {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 20px 28px 20px;
+}
+
+.shelf {
+  display: flex;
+  gap: 14px;
+  align-items: flex-end;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-height: 220px;
+  padding: 12px;
+  perspective: 1000px;
+  background: --accent-primary;
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+
+.shelf-base {
+  margin-top: 6px;
+  height: 18px;
+  background: linear-gradient(180deg,#b77f3d,#8b5a2b);
+  border-radius: 6px;
+  box-shadow: inset 0 4px 8px rgba(0,0,0,0.12);
+}
+
+@media (max-width: 700px) {
+  .shelf { gap: 10px; }
+}

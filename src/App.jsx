@@ -5,6 +5,7 @@ import Bar from './components/Bar.tsx'
 import PictureFrame from './components/PictureFrame.tsx'
 import AboutCard from './components/AboutCard.tsx'
 import ProjectSkills from './components/ProjectSkills.tsx'
+import Shelf from './components/Shelf.tsx'
 import { useState, useEffect } from 'react'
 
 function App() {
@@ -33,7 +34,6 @@ function App() {
     <>
       <Bar />
       <main>
-        {/* Add picture of self, maybe circle with glow effect */}
         <div className="glow-container">
           <div className="hero-inner">
             <div className="hero-image">
@@ -65,6 +65,10 @@ function App() {
           <SimpleAccordion title='Projects' expanded={expandedPanel === 'panel3'} onChange={handlePanelChange('panel3')}>
             <ProjectSkills />
           </SimpleAccordion>
+        </div>
+        <div>
+          <h1 className="demo-header">Demo Showcase</h1>
+          <Shelf />
         </div>
         <div className="bottom-bar-spacer" />
         <footer className={`bottom-bar ${showBottomBar ? 'visible' : ''}`}>
